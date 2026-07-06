@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker · Finance</title>
+    <!-- Font & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="Style.css">
+
+    <style>
+    </style>
+</head>
+<body>
+<div class="app" id="app">
+    <h1><i class="fas fa-wallet"></i> Expense Tracker</h1>
+
+    <div class="grid-2">
+        <!-- left: form + list -->
+        <div>
+            <div class="card">
+                <div class="card-title"><i class="fas fa-plus-circle"></i> Add expense</div>
+                <form id="expenseForm" class="expense-form">
+                    <div class="form-row">
+                        <input type="text" id="expenseName" placeholder="Description" required>
+                        <input type="number" id="expenseAmount" placeholder="Amount" step="0.01" min="0.01" required>
+                    </div>
+                    <div class="form-row">
+                        <select id="expenseCategory">
+                            <option value="Food">🍔 Food</option>
+                            <option value="Transport">🚗 Transport</option>
+                            <option value="Shopping">🛍️ Shopping</option>
+                            <option value="Bills">📄 Bills</option>
+                            <option value="Entertainment">🎬 Entertainment</option>
+                            <option value="Health">💊 Health</option>
+                            <option value="Other">📌 Other</option>
+                        </select>
+                        <button type="submit" class="btn" id="formSubmitBtn"><i class="fas fa-plus"></i> Add</button>
+                    </div>
+                    <input type="hidden" id="editId" value="">
+                </form>
+            </div>
+
+            <div class="card" style="margin-top: 1.5rem;">
+                <div class="card-title"><i class="fas fa-list-ul"></i> Expenses</div>
+                <div class="actions-row">
+                    <div class="filter-group">
+                        <i class="fas fa-filter" style="color:#4a6f9a;"></i>
+                        <select id="categoryFilter">
+                            <option value="all">All categories</option>
+                            <option value="Food">Food</option>
+                            <option value="Transport">Transport</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Bills">Bills</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Health">Health</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-outline" id="clearAllBtn" style="padding:0.4rem 1rem;"><i class="fas fa-trash-alt"></i> Clear</button>
+                </div>
+                <div class="expense-list" id="expenseList">
+                    <div class="empty-state"><i class="fas fa-inbox" style="margin-right: 0.4rem;"></i>No expenses yet</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- right: stats, chart, budget -->
+        <div>
+            <div class="card">
+                <div class="card-title"><i class="fas fa-chart-pie"></i> Monthly summary</div>
+                <div class="summary-stats" id="summaryStats">
+                    <div class="stat"><span class="stat-label">Total</span> <span class="stat-value" id="totalAmount">$0.00</span></div>
+                    <div class="stat"><span class="stat-label">Categories</span> <span class="stat-value" id="categoryCount">0</span></div>
+                    <div class="stat"><span class="stat-label">Avg</span> <span class="stat-value" id="avgAmount">$0.00</span></div>
+                </div>
+
+                <div class="chart-container">
+                    <div style="display:flex; justify-content:space-between; font-size:0.7rem; color:#3d5775; padding:0 0.2rem 0.2rem;">
+                        <span>Spending by category</span>
+                        <span id="chartLegend">—</span>
+                    </div>
+                    <div class="bar-chart" id="barChart"></div>
+                </div>
+
+                <div class="budget-section">
+                    <div class="budget-row">
+                        <i class="fas fa-coins" style="color:#2a7de1; font-size:1.2rem;"></i>
+                        <span style="font-weight:500;">Monthly budget</span>
+                        <input type="number" id="budgetInput" placeholder="e.g. 500" step="10" min="0">
+                        <button class="btn" id="setBudgetBtn" style="padding:0.5rem 1.2rem;">Set</button>
+                    </div>
+                    <div class="budget-status" id="budgetStatus">
+                        <i class="fas fa-circle" style="color:#2a7de1; font-size:0.6rem;"></i> 
+                        <span>Budget: <span id="budgetDisplay">$0</span></span>
+                        <span style="margin-left:1.2rem;">Spent: <span id="budgetSpent">$0.00</span></span>
+                        <span style="margin-left:1.2rem;" id="budgetRemain"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="App.js"></script>
+</body>
+</html>
